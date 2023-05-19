@@ -9,12 +9,12 @@
         <el-form  ref="loginfromRef" :model="loginFrom" :rules="loginFromRules" label-width="0px" class="login_form">
             <!-- 用户名 -->
             <el-form-item class="input" prop="username">
-                <el-input v-model="loginFrom.username" prefix-icon="el-icon-user"></el-input>
+                <el-input v-model="loginFrom.username" prefix-icon="el-icon-user" style="border-radius:10px" ></el-input>
             </el-form-item>
             <br>
             <!-- 密码 -->
             <el-form-item class="input" prop="password">
-                <el-input show-password v-model="loginFrom.password" prefix-icon="el-icon-lock"></el-input>
+                <el-input show-password v-model="loginFrom.password" prefix-icon="el-icon-lock" style="border-radius:10px" ></el-input>
             </el-form-item>
             <!-- 按钮 -->
             <el-form-item class="btn">
@@ -44,7 +44,7 @@ export default {
                 /* 验证密码 */
                 password:[
                 { required: true, message: '请输入正确的密码', trigger: 'blur'},
-                { min: 3, max: 6, message: '长度在 8到 13个字符', trigger: 'blur'}
+                { min: 3, max: 6, message: '长度在 3到 6个字符', trigger: 'blur'}
                 ]
             }      
     }
@@ -64,7 +64,7 @@ methods:{
             this.$message.success("成功出发 欧尼酱");
 
             /* 将token保存到sessionStorage中 */
-            window.sessionStorage.setItem("token",res.data.token);
+            window.sessionStorage.setItem('token',res.data.token);
             this.$router.push("/home");
         });
     }
@@ -82,9 +82,9 @@ methods:{
 .login_box{
     width: 450px;
     height: 500px;
-    background-color:rgb(203, 146, 176);
-    background-image: url('../assets/106833158_p0_master1200.jpg');
-    background-size: cover;
+    /* background-image: url('../assets/106833158_p0_master1200.jpg'); */
+    /* background-size: cover; */
+    border: 1px solid pink;
     border-radius: 10px;
     position:absolute;
     left: 50%;
