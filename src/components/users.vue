@@ -34,11 +34,11 @@
                            @change="userStateChanged(scope.row)">
                          </el-switch>
                 </template>
-                </el-table-column>
+                </el-table-column> 
                 <el-table-column label="操作" width="180px">
                     <template slot-scope="scope">
-                        <el-button type="primary" style="border-radius:10px" @click="showedialogVisible()" size="mini" icon="el-icon-edit"></el-button>
-                        <el-button type="danger" style="border-radius:10px" size="mini" icon="el-icon-delete"></el-button>
+                        <el-button type="primary" style="border-radius:10px" @click="showedialogVisible(scope.row.id)" size="mini" icon="el-icon-edit"></el-button>
+                        <el-button type="danger" style="border-radius:10px" size="mini" icon="el-icon-delete" @click="removeUserById(scope.row.id)"></el-button>
                         <el-tooltip class="item" effect="light" :enterable="false" content="授权" placement="top">
                             <el-button type="warning" style="border-radius:10px" size="mini" icon="el-icon-setting"></el-button>
                         </el-tooltip>                   
@@ -85,31 +85,41 @@
             </span>
         </el-dialog>
         <!-- 修改用户对话框 -->
-        <template>
-            <div>
-        <dialog>
-           <span>这是一段信息</span>
+        <el-dialog 
+            title="修改用户"
+            :visible.sync="edialogVisible"
+            width="35%" 
+            :append-to-body="true"
+            @close="eddDialogClose">
+            <!--内容区 -->
+        <el-form :model="editFrom" :rules="addFormRules" ref="editFromRef" label-width="80px">
+            <el-form-item label="用户名" prop="username">
+                <el-input v-model="editFrom.username" disabled></el-input>
+            </el-form-item>
+            <el-form-item label="电话" prop="mobile">
+                <el-input v-model="editFrom.mobile"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱" prop="email">
+                <el-input v-model="editFrom.email"></el-input>
+            </el-form-item>
+        </el-form> 
+        <!-- 底部区 -->
            <span slot="footer" class="dialog-footer">
              <el-button @click="edialogVisible = false">取 消</el-button>
-             <el-button type="primary" @click="edialogVisible = false">确 定</el-button>
+             <el-button type="primary" @click="eddUserInfo()">确 定</el-button>
            </span>
-        </dialog>
-</div>
-</template>
+        </el-dialog>
     </div>         
 </template>
 
 <script>
-import dialog from '@/components/dialog.vue'
-import { SourceMapConsumer } from '@jridgewell/source-map';
+
 import { Message } from 'element-ui';
 import { ref } from 'vue';
 
 export default {
     name:'users',
-    components:{
-        dialog
-    },
+    components:{},
     data(){
          //验证邮箱的规则
          var checkEmail=(rule,value,cb)=>{
@@ -163,6 +173,9 @@ export default {
                 {validator:checkPhone,trigger:'blur'},]
         },
             //修改用户对话框的显示
+            edialogVisible:false,
+            //请求参数
+            editFrom:{}
         }
     },
     created(){
@@ -219,13 +232,53 @@ export default {
         })
     },
     //展示编辑用户的对话框
-    showedialogVisible(){
-        this.$bus.$emit('dialogVisible',{
-            edialogVisible:true,
-            dialogTitle:"修改用户",
-            dialogWidth:"35%"
+    async showedialogVisible(id){
+           const{data:res} =  await  this.$http.get('users/'+id,this.editFrom)
+           if(res.meta.status!==200){
+            return this.$message.error('错误')
+           }
+           this.edialogVisible = true
+           this.editFrom = res.data
+           this.$message.success('成功修改')
+    },
+    //表单的清空
+    eddDialogClose(){
+        this.$refs.eddDialogClose.resetFields()
+    },
+    //修改用户信息并提交
+    eddUserInfo(){
+        this.$refs.editFromRef.validate(async valid=>{
+            if(!valid) return
+        const{data:res} = await this.$http.put('users/'+this.editFrom.id,{email:this.editFrom.email,mobile:this.editFrom.mobile})
+        if(res.meta.status!==200){
+            return this.$message.error('请求出错')
+        }    
+
+            this.edialogVisible= false
+            //更新列表
+            this.getUserList()
+            this.$message.success('请求成功')
         })
+
+    },
+    //删除操作根据ID
+    async removeUserById(){
+        //弹出询问是否删除
+        const confirmResult = await this.$confirm('欧尼酱,消灭该敌人, 嗯?', '询问QAQ', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+        ).catch(err => err)
+        //如果用户确认删除，则返回值为字符串 confirm
+        //如果用户取消删除，则返回值为字符串 cancel
+        if(confirmResult !=='confirm'){
+            return this.$message.info('已取消删除')
+        }
+        console.log('确认乐删除')
+
     }
+
 }
 }
 </script>

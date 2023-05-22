@@ -15,17 +15,14 @@ export default {
   name: 'dialog',
   data(){
     return{
-      edialogVisible:false,
-      dialogTitle:'',
-      dialogWidth:''
+      edialogVisible:true,
+      dialogTitle:'修改用户',
+      dialogWidth:'35%'
     }
   },
   mounted() {
-    this.$bus.$on('dialogVisible',(edialogVisible)=>{
-      this.edialogVisible=edialogVisible,
-      this.dialogTitle=dialogTitle,
-      this.width=dialogWidth
-
+    this.$bus.$on('dialogVisible',(value)=>{
+      this.edialogVisible= value
     })
   },
   methods: {
