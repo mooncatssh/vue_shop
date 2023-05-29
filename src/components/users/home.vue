@@ -28,7 +28,7 @@
             <div @click="miao"><span class="h2">喵酱</span></div>
           </div>
       <el-menu  active-text-color="pink" :unique-opened="true" :collapse="isCollapse" 
-      :collapse-transition="false" :router="true">
+      :collapse-transition="false" :router="true"> <!-- 在el-menu组件中 添加router实现路由跳转 以:index="'/'+item.path"的值 -->
         <el-submenu  v-for="item in menulist" :key="item.id" 
         :index="'/'+item.path" :default-active="activePath">
           <!-- 一级菜单 -->

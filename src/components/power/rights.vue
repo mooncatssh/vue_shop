@@ -67,4 +67,8 @@ export default {
 .el-table{
     margin-top: 20px;
 }
+/deep/ .el-card__body{
+    height: 400px;
+    overflow-y: scroll;
+}
 </style>>
