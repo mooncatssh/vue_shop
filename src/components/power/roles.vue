@@ -10,7 +10,7 @@
         <!-- 添加角色区域 -->
         <el-row :gutter="70">
                 <el-col>
-                    <el-button @click="addDialogVisible=true"  class="b2" type="primary" round>添加用户</el-button>
+                    <el-button @click="addDialogVisible=true"  class="b2" type="primary" round>添加角色</el-button>
                 </el-col>
         </el-row>
         <!-- 权限列表 -->
