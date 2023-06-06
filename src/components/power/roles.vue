@@ -14,7 +14,7 @@
                 </el-col>
         </el-row>
         <!-- 权限列表 -->
-        <el-table :data="rolelist">
+        <el-table :data="rolelist" border stripe>
             <!--展开列  -->
             <el-table-column type="expand" >
                  <template slot-scope="scope">

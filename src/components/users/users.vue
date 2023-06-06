@@ -239,6 +239,7 @@ export default {
         this.querryInfo.pagenum = newPage;
         this.getUserList()
     },
+    /* 获取角色状态信息 */
     async userStateChanged(userinfo){
         console.log(userinfo)
         const {data:res} = await this.$http.put(`users/${userinfo.id}/state/${userinfo.mg_state}`)
