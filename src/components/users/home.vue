@@ -14,7 +14,7 @@
           </div>
         </div>
         <span class="h1">首先我不是萝莉控</span>
-        <el-button type="info" @click="logout">登出</el-button>
+        <el-button class="d" @click="logout">登出</el-button>
       </el-header>
       <!-- 页面主题区域 -->
       <el-container>
@@ -210,7 +210,7 @@ img{
 }
 .el-aside{
   z-index: 0;
-  background-image: url('../../assets/E396051FBDDC7132E0F665EF14BE939E.png');
+  background-image: url('../../assets/564206B552E02E3DBF3E2FA611BBDCFF.jpg');
   background-size: cover;
 }
 .toggle-button{
@@ -225,5 +225,12 @@ img{
 }
 .el-main{
   background-color: antiquewhite;
+}
+.d{
+    font-style: italic;
+    font-size: 30px;
+    color: pink;
+    border-radius: 30px;
+    opacity: 0.5;
 }
 </style>

@@ -15,7 +15,7 @@
                     </el-input>
                 </el-col>
                 <el-col :span="4">
-                    <el-button class="b2" type="primary" @click="drawer=true">添加商品</el-button>
+                    <el-button class="b2" type="primary" @click="addSetGoods">添加商品</el-button>
                 </el-col>
         </el-row>
         <!--商品列表 -->
@@ -32,7 +32,7 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="primary"  icon="el-icon-edit"></el-button>
+                    <el-button size="mini" type="primary" @click="showGoods(scope.row.goods_id)" icon="el-icon-edit"></el-button>
                     <el-button type="danger" style="border-radius:10px" @click="removeGoods(scope.row.goods_id)" size="mini" icon="el-icon-delete" ></el-button>
                 </template>
             </el-table-column>
@@ -49,34 +49,35 @@
             </el-pagination>
         <!-- 添加商品对话框 -->
         <el-drawer
-            title="我是标题"
+            title="修改商品信息"
             :visible.sync="drawer"
             :direction="direction"
-            :before-close="handleClose">
-            <span>我来啦!</span>         
+            :append-to-body="true"
+            size="30%"
+            :before-close="handleClose">        
             <!-- 内容主题区 -->
         <el-form :model="addGoods" :rules="addGoodsRules" ref="addGoodsRef" label-width="80px">
-              <el-form-item label="商品名称" prop="goods_name">
+              <el-form-item class="b3" label="商品名称" prop="goods_name">
                 <el-input v-model="addGoods.goods_name"></el-input>
               </el-form-item>
-              <el-form-item label="以为','分割的分类列表" prop="goods_cat">
+              <el-form-item class="b3" label="" prop="goods_cat">
                 <el-input v-model="addGoods.goods_cat"></el-input>
               </el-form-item>
-              <el-form-item label="价格" prop="goods_price">
+              <el-form-item class="b3" label="价格" prop="goods_price">
                 <el-input v-model="addGoods.goods_price"></el-input>
               </el-form-item>
-              <el-form-item label="数量" prop="goods_number">
+              <el-form-item class="b3" label="数量" prop="goods_number">
                 <el-input v-model="addGoods.goods_number"></el-input>
               </el-form-item>
-              <el-form-item label="重量" prop="goods_weight">
+              <el-form-item class="b3" label="重量" prop="goods_weight">
                 <el-input v-model="addGoods.goods_weight"></el-input>
               </el-form-item>
-        </el-form>            
-            <!--底部区 -->
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="addDialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="addgoods">确 定</el-button>
-            </span>
+              
+        </el-form>
+        <div class="demo-drawer__footer">           
+              <el-button class="b4" @click="drawer = false">取 消</el-button>
+              <el-button class="b4" type="primary" @click="addgoods">确 定</el-button>
+        </div> 
         </el-drawer>    
 </el-card>
   </div>
@@ -134,14 +135,9 @@ export default {
             this.queryInfo.pagenum = newPage
             this.getGoodsList()
         },
-        /* 提交添加商品 */
-        async addgoods(){
-            const{data:res} = await this.$http.post('goods',this.addGoods)
-            if(res.meta.status!==201){
-                return this.$message.error('添加商品失败')
-            }
-            this.addDialogVisible = false
-            this.getGoodsList()
+        /* 添加商品页面跳转 */
+        async addSetGoods(){
+            this.$router.push('/goods/add')
         },
         /* 删除商品 */
         async removeGoods(id){
@@ -161,7 +157,15 @@ export default {
             return this.$message.error('删除商品失败')
         }
         this.getGoodsList()
-    }
+        },
+        /* 查询商品信息 */
+        async showGoods(id){
+            const{data:res} = await this.$http.get(`categories/${id}`)
+            if(res.meta.status!==200){
+                return this.$message.error('查询商品信息失败')
+            }
+            this.drawer = true
+        }
 }
 
 }
@@ -198,7 +202,7 @@ export default {
 /deep/.el-input__inner{
     background-color: rgb(115, 234, 108);
     font-size: 20px;
-    color: red;
+    color: rgb(48, 45, 45);
     opacity: 0.3;
 }
 /deep/.el-input__inner:hover{
@@ -220,15 +224,37 @@ export default {
     width: 1500px;
     opacity: 0.5;
 }
-/deep/ .el-dialog{
-    border-radius: 50px;
-}
-/deep/ .el-dialog__header{
-    padding: 1vh 1vw 0 1vw;
-    background-image: url('../../assets/E624A820181D9856AA0ED0F782385C1B.jpg');
+/deep/ .el-drawer{
+    background-image: url('../../assets/F38E275BCB5F3E291BBC99A932971ECE.jpg');
     background-size: cover;
-    border-radius: 50px;
-    opacity: 0.5;
+    opacity: 0.7;
+}
+/deep/.el-drawer{
+    span{
+    margin-left: 100px;
+    line-height: 80px;
+    font-size: 30px;
+    color: #2d2e30;
+    font-style: italic;
+    opacity: 0.8;
+    }
+
+}
+.b3{
+    /deep/ .el-form-item__label{
+    height: 50px;
+    font-size: 30px;
+    color:slategray;
+    text-align: left;
+
+}
+    /deep/.el-input__inner{
+    background-color: dimgray;
+    width: 250px;
+    font-size: 20px;
+    color: rgb(30, 29, 29);
+    opacity: 0.3;
+    }
 }
 /deep/ .el-dialog__title {
     margin-left: 130px;
@@ -238,25 +264,12 @@ export default {
     font-style: italic;
     opacity: 0.8;
     }
-/deep/ .el-dialog__body{
-    line-height: 20px;
-    font-style: italic;
-    opacity: 0.5;
-    background-image: url('../../assets/E624A820181D9856AA0ED0F782385C1B.jpg');
-    background-size:cover;
-}
 /deep/ .el-form-item__label{
     height: 50px;
-    font-size: 17px;
-    color: aqua;
+    font-size: 14px;
+    color:aqua;
     text-align: left;
 
-}
-/deep/ .el-dialog__footer{
-    background-image: url('../../assets/E624A820181D9856AA0ED0F782385C1B.jpg');
-    background-size:cover;
-    border-radius: 50px;
-    opacity: 0.5;
 }
 .el-pagination{
     margin-top: 20px;

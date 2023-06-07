@@ -1,12 +1,16 @@
 <template>
   <div class="login_container">
+    <div class="h3">You Shall Die</div>
     <div class="login_box">
         <!-- 头像区 -->
         <div class="avatar_box">
-            <img src="../../assets/106449882_p0_master1200.jpg" alt="">
+            <div class="img"></div>
         </div>
         <!-- 登录区 -->
         <el-form  ref="loginfromRef" :model="loginFrom" :rules="loginFromRules" label-width="0px" class="login_form">
+            <div class="w">HI,GOAT</div>
+            <br><br>
+            <div class="w">Welcome Back</div>
             <!-- 用户名 -->
             <el-form-item class="input" prop="username">
                 <el-input v-model="loginFrom.username" prefix-icon="el-icon-user" style="border-radius:10px" ></el-input>
@@ -16,11 +20,9 @@
             <el-form-item class="input" prop="password">
                 <el-input show-password v-model="loginFrom.password" prefix-icon="el-icon-lock" style="border-radius:10px" ></el-input>
             </el-form-item>
+            <div class="text">这是一场试炼</div>
             <!-- 按钮 -->
-            <el-form-item class="btn">
-                <el-button type="primary" round @click="login">登录</el-button>
-                <el-button type="info" round @click="resetLoginfrom">重置</el-button>
-            </el-form-item>
+            <el-button  round @click="login">登录</el-button>
         </el-form>
     </div>
   </div>
@@ -75,54 +77,102 @@ methods:{
 <style lang="less" scoped>
 .login_container{
     height: 100%;
-    background-image: url(../../assets/107465767_p1_master1200.jpg);
-    background-size: cover;
-    background-attachment:scroll;
+    background-color: blanchedalmond;
 }
+.h3{
+    margin-left: 500px;
+    color: #9c9c9c;
+    font-size: 80px;
+    font-style: italic;
+}
+
 .login_box{
-    width: 450px;
+    width: 800px;
     height: 500px;
-    /* background-image: url('../assets/106833158_p0_master1200.jpg'); */
-    /* background-size: cover; */
-    border: 1px solid pink;
     border-radius: 10px;
+    opacity: 0.8;
     position:absolute;
-    left: 50%;
+    left: 53%;
     top:60%;
+    box-shadow: 0 5px 10px rgb(206, 151, 151);
     transform: translate(-50%,-50%);
 }
 .avatar_box{
-    height: 230px;
-    width: 230px;
-    margin-top:-100px;
-    margin-left: 100px;
+    height: 500px;
+    width: 400px;
+    margin-top:-10px;
+    margin-left: -11px;
+    border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 10px white;
     border: 1px solid white;
-    border-radius: 50%;
-    img{
+    .img{
+        background: url("../../assets/106449882_p0_master1200.jpg");
+        animation: moveImg 7s infinite alternate linear;
         height: 100%;
         width: 100%;
-        border-radius: 50%;
     }
 }
-.input{
-    border: 5px solid pink;
-    font-size: 12px;
-    border-radius: 10px;
+/deep/ .el-input__prefix{
+    margin-left: -10px;
+}
+/deep/.el-input__inner{
+    border-radius: 30px;
+    border: 0px;
+    box-shadow: 0 2px pink;
+}
+/deep/.el-input{
+    height: 50px;
+    outline: none;
+    font-size: 35px;
+    border: 0px;
 }
 .login_form{
     width: 300px;
     height: 200px;
     position: absolute;
-    left: 60px;
-    top: 180px;
+    left: 450px;
+    top: 100px;
     padding: 0px 20px;
 }
-.btn{
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 70px;
+bottom{
+    font-size: 40px;
+}
+/deep/.el-button{
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 30px;
+    color: pink;
+    margin-left: 90px;
+}
+
+.text{
+    text-align: center;
+    font-size: 25px;
+    font-style: italic;
+    -webkit-background-clip: text;
+    background: url('../../assets/A3E6E56333801E4640CA678F83321707.jpg');
+    animation: moveImg 7s infinite alternate linear;
+}
+@keyframes moveImg {
+            0% {
+                background-position: 0%;
+            }
+ 
+            50% {
+                background-position: 50%;
+            }
+ 
+            100% {
+                background-position: 100%;
+            }
+        }
+
+.w{
+    color: #9c9c9c;
+    font-size: 40px;
+    margin-left: 20px;
+    margin-top: -50px;
 }
 </style>>
 
