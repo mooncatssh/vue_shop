@@ -71,4 +71,13 @@ export default {
     height: 400px;
     overflow-y: scroll;
 }
+/* 隐藏滚动条 */
+/deep/::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/deep/::-webkit-scrollbar-button {
+  display:none;
+}
 </style>>

@@ -10,6 +10,8 @@ import cate from '../components/goods/cate.vue'
 import params from '../components/goods/params.vue'
 import list from '../components/goods/list.vue'
 import add from '../components/goods/add.vue'
+import Order from '../components/order/Order.vue'
+import Reports from '../components/reports/Reports.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -20,21 +22,24 @@ const router = new VueRouter({
     path:'/home',
     component:home,
     redirect:'/wlcome',
-    children:[{path:'/wlcome',component:welcome},
+    children:[
+    {path:'/wlcome',component:welcome},
     {path:'/users',component:users,},
     {path:'/rights',component:rights},
     {path:'/roles',component:roles},
     {path:'/categories',component:cate},
     {path:'/params',component:params},
     {path:'/goods',component:list},
-    {path:'/goods/add',component:add}
+    {path:'/goods/add',component:add},
+    {path:'/orders',component:Order},
+    {path:'/reports',component:Reports}
   ]
   },
   ]
 })
 
 /* 挂载路由守卫 */
-router.beforeEach((to,from,next)=>{
+ router.beforeEach((to,from,next)=>{
   //to 将要访问的路径
   //from 从哪个路径来的
   // next 是个函数，表示放行

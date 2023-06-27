@@ -13,7 +13,7 @@
             <span><a href="#" style="color:rgb(205, 221, 221); text-decoration:none"><i class="el-icon-s-cooperation"></i> ..</a></span>
           </div>
         </div>
-        <span class="h1">首先我不是萝莉控</span>
+        <span class="h1">First of all, I'm not a lolly fan</span>
         <el-button class="d" @click="logout">登出</el-button>
       </el-header>
       <!-- 页面主题区域 -->
@@ -116,6 +116,20 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@keyframes moveImg {
+            0% {
+                background-position: 0%;
+            }
+ 
+            50% {
+                background-position: 50%;
+            }
+ 
+            100% {
+                background-position: 100%;
+            }
+        }
+
 .beijin{
   height: 100%;
   background-image: url('../../assets/D1D9BAE0A3A57FA1DE014A57D52E9990.jpg');
@@ -128,6 +142,7 @@ export default {
   height: 100%;
 }
 .el-header{
+  border-radius: 20px;
   display: flex;
   justify-content: space-between;
   background-image: url('../../assets/106449882_p0_master1200.jpg');
@@ -141,6 +156,10 @@ export default {
   background-color: rgb(168, 77, 77);
   color:white;
   span{
+    color: transparent;
+    background: url('../../assets/564206B552E02E3DBF3E2FA611BBDCFF.jpg');
+    -webkit-background-clip: text;
+    animation: moveImg 9s infinite alternate linear;
     position: relative;
     left: 20px;
     top:-25px;
@@ -162,11 +181,13 @@ export default {
   }
 }
 .h1{
-  width: 1000px;
-  margin-right: 400px;
-  font-size: 60px;
-  float:left;
-  color: rgb(73, 95, 128);
+  color: transparent;
+    background: url('../../assets/E396051FBDDC7132E0F665EF14BE939E.png');
+    -webkit-background-clip: text;
+    animation: moveImg 9s infinite alternate linear;
+  margin-right: 200px;
+  font-style: italic;
+  font-size: 60px; 
 }
 .img1{
   margin: 0 auto;
@@ -198,7 +219,7 @@ img{
   border-right: none;
   active-text-color:"pink";
   overflow:hidden;//去掉滚动条
-  border-radius: 20px;
+  border-radius: 30px;
   position: relative;
   margin: 0 auto;
   opacity: 0.44;//透明度
@@ -210,8 +231,7 @@ img{
 }
 .el-aside{
   z-index: 0;
-  background-image: url('../../assets/564206B552E02E3DBF3E2FA611BBDCFF.jpg');
-  background-size: cover;
+  border-radius: 30px;
 }
 .toggle-button{
   font-size: 40px;

@@ -80,8 +80,11 @@ methods:{
     background-color: blanchedalmond;
 }
 .h3{
+    color: transparent;
+    background: url('../../assets/90648E8416A71D1C801AF85F12323E86.jpg');
+    -webkit-background-clip: text;
+    animation: moveImg 4s infinite alternate linear;
     margin-left: 500px;
-    color: #9c9c9c;
     font-size: 80px;
     font-style: italic;
 }
@@ -148,10 +151,11 @@ bottom{
 
 .text{
     text-align: center;
-    font-size: 25px;
+    font-size: 40px;
     font-style: italic;
-    -webkit-background-clip: text;
+    color: transparent;
     background: url('../../assets/A3E6E56333801E4640CA678F83321707.jpg');
+    -webkit-background-clip: text;
     animation: moveImg 7s infinite alternate linear;
 }
 @keyframes moveImg {
@@ -169,7 +173,10 @@ bottom{
         }
 
 .w{
-    color: #9c9c9c;
+    color: transparent;
+    background: url('../../assets/A3E6E56333801E4640CA678F83321707.jpg');
+    -webkit-background-clip: text;
+    animation: moveImg 9s infinite alternate linear;
     font-size: 40px;
     margin-left: 20px;
     margin-top: -50px;

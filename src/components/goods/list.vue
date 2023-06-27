@@ -47,9 +47,8 @@
                layout="total, sizes, prev, pager, next, jumper"
                :total="total">
             </el-pagination>
-        <!-- 添加商品对话框 -->
+        <!-- 编辑商品对话框 -->
         <el-drawer
-            title="修改商品信息"
             :visible.sync="drawer"
             :direction="direction"
             :append-to-body="true"
@@ -57,11 +56,8 @@
             :before-close="handleClose">        
             <!-- 内容主题区 -->
         <el-form :model="addGoods" :rules="addGoodsRules" ref="addGoodsRef" label-width="80px">
-              <el-form-item class="b3" label="商品名称" prop="goods_name">
+              <el-form-item class="b3" label="名称" prop="goods_name">
                 <el-input v-model="addGoods.goods_name"></el-input>
-              </el-form-item>
-              <el-form-item class="b3" label="" prop="goods_cat">
-                <el-input v-model="addGoods.goods_cat"></el-input>
               </el-form-item>
               <el-form-item class="b3" label="价格" prop="goods_price">
                 <el-input v-model="addGoods.goods_price"></el-input>
@@ -92,7 +88,7 @@ export default {
             queryInfo:{
                 query:'',
                 pagenum: 1,
-                pagesize: 10
+                pagesize: 5
             },
             /* 商品列表 */
             goodslist: [],
@@ -210,7 +206,7 @@ export default {
 }
 /deep/ .el-button.el-button--default{
     border-radius: 30px;
-    background-color: rgb(96, 105, 105);
+    background-color: rgb(102, 199, 199);
     color: rgb(212, 92, 112);
     
 }
@@ -225,16 +221,13 @@ export default {
     opacity: 0.5;
 }
 /deep/ .el-drawer{
-    background-image: url('../../assets/F38E275BCB5F3E291BBC99A932971ECE.jpg');
+    background-image: url('../../assets/3839A082A178F54ACD24ECD3ECC9749E.jpg');
     background-size: cover;
     opacity: 0.7;
 }
 /deep/.el-drawer{
     span{
     margin-left: 100px;
-    line-height: 80px;
-    font-size: 30px;
-    color: #2d2e30;
     font-style: italic;
     opacity: 0.8;
     }
@@ -244,17 +237,20 @@ export default {
     /deep/ .el-form-item__label{
     height: 50px;
     font-size: 30px;
-    color:slategray;
+    color:rgb(82, 141, 200);
     text-align: left;
 
 }
     /deep/.el-input__inner{
-    background-color: dimgray;
-    width: 250px;
-    font-size: 20px;
-    color: rgb(30, 29, 29);
+    background-color: rgb(208, 85, 163);
+    width: 300px;
+    font-size: 30px;
+    color: rgb(202, 231, 17);
     opacity: 0.3;
     }
+    /deep/.b4{
+        opacity: 0.2;
+}
 }
 /deep/ .el-dialog__title {
     margin-left: 130px;
